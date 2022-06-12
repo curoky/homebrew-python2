@@ -1,11 +1,13 @@
-# Curoky Python2
+# Homebrew Tap for Python2
 
-## How do I install these formulae?
+[![brew test-bot](https://github.com/curoky/homebrew-python2/actions/workflows/tests.yml/badge.svg)](https://github.com/curoky/homebrew-python2/actions/workflows/tests.yml)
 
-`brew install curoky/python2/<formula>`
+Homebrew removed python2 support, see [here](https://github.com/Homebrew/homebrew-core/pull/49796) for more details.
 
-Or `brew tap curoky/python2` and then `brew install <formula>`.
+I extracted the last [version](https://github.com/Homebrew/linuxbrew-core/commits/master?branch=master&path%5B%5D=Formula&path%5B%5D=python@2.rb) of `python@2.rb` and put it here for maintenance.
 
-## Documentation
+## Usage
 
-`brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
+`brew install curoky/python2/python@2`
+
+Or `brew tap curoky/python2` and then `brew install python@2`.
