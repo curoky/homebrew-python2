@@ -5,6 +5,12 @@ class PythonAT2 < Formula
   sha256 "b62c0e7937551d0cc02b8fd5cb0f544f9405bafc9a54d3808ed4594812edef43"
   license "Python-2.0"
 
+  bottle do
+    root_url "https://github.com/curoky/homebrew-python2/releases/download/bottles"
+    sha256 big_sur:         "12f81074f5d9b4dcacdc7c20ba99811b624c2429299a150c3a06d117c9acb49c"
+    sha256 x86_64_linux:    "50b6da06b2ca7a8f01b823e17592d0fa027fd23e7c55089f98753be28fed21ce"
+  end
+
   # setuptools remembers the build flags python is built with and uses them to
   # build packages later. Xcode-only systems need different flags.
   pour_bottle? do
@@ -92,6 +98,7 @@ class PythonAT2 < Formula
       --datarootdir=#{share}
       --datadir=#{share}
       --with-dbmliborder=gdbm:ndbm
+      --with-openssl=#{Formula["openssl@1.1"].opt_prefix}
       --without-ensurepip
     ]
     # https://stackoverflow.com/questions/8010384/pyunicodeucs4-fromencodedobject-error
