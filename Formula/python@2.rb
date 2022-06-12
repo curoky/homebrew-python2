@@ -36,14 +36,17 @@ class PythonAT2 < Formula
 
   resource "setuptools" do
     url "https://files.pythonhosted.org/packages/b2/40/4e00501c204b457f10fe410da0c97537214b2265247bc9a5bc6edd55b9e4/setuptools-44.1.1.zip"
+    sha256 "c67aa55db532a0dadc4d2e20ba9961cbd3ccc84d544e9029699822542b5a476b"
   end
 
   resource "pip" do
     url "https://files.pythonhosted.org/packages/53/7f/55721ad0501a9076dbc354cc8c63ffc2d6f1ef360f49ad0fbcce19d68538/pip-20.3.4.tar.gz"
+    sha256 "6773934e5f5fc3eaa8c5a44949b5b924fc122daa0a8aa9f80c835b4ca2a543fc"
   end
 
   resource "wheel" do
     url "https://files.pythonhosted.org/packages/ed/46/e298a50dde405e1c202e316fa6a3015ff9288423661d7ea5e8f22f589071/wheel-0.36.2.tar.gz"
+    sha256 "e11eefd162658ea59a60a0f6c7d493a7190ea4b9a85e335b33489d9f17e0245e"
   end
 
   def lib_cellar
@@ -68,7 +71,7 @@ class PythonAT2 < Formula
     ENV["CONFIG_SHELL"] = "/bin/sh"
     gcc = Formula["gcc"]
     gcc_major_ver = gcc.any_installed_version.major
-    on_linux do
+    if OS.linux?
       ENV["CC"] = gcc.opt_bin / "gcc-#{gcc_major_ver}"
       ENV["CXX"] = gcc.opt_bin / "g++-#{gcc_major_ver}"
     end
@@ -102,7 +105,7 @@ class PythonAT2 < Formula
       # https://bugs.python.org/issue43109
       args << "LLVM_AR=/usr/bin/ar"
     end
-    on_linux do
+    if OS.linux?
       args << "--enable-shared"
       # Required for the _ctypes module
       # see https://github.com/Linuxbrew/homebrew-core/pull/1007#issuecomment-252421573
@@ -338,9 +341,9 @@ class PythonAT2 < Formula
     # Check if some other modules import. Then the linked libs are working.
     system "#{bin}/python#{version.major_minor}", "-c", "import gdbm"
     system "#{bin}/python#{version.major_minor}", "-c", "import zlib"
-    on_macos do
-      # system "#{bin}/python#{version.major_minor}", "-c", "import tkinter; root = tkinter.Tk()"
-    end
+    # on_macos do
+    #   system "#{bin}/python#{version.major_minor}", "-c", "import tkinter; root = tkinter.Tk()"
+    # end
 
     system bin / "pip", "list", "--format=columns"
   end
